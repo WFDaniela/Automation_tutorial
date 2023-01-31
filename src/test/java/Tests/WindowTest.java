@@ -2,6 +2,7 @@ package Tests;
 
 import HelpMethods.ElementMethods;
 import HelpMethods.PageMethods;
+import HelpMethods.WindowMethods;
 import ShareData.ShareData;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
@@ -17,24 +18,28 @@ public class WindowTest extends ShareData {
     public void MetodaTest() {
         ElementMethods elementMethods = new ElementMethods(getDriver());
         PageMethods pageMethods = new PageMethods(getDriver());
+        WindowMethods windowMethods = new WindowMethods(getDriver());
 
 
         WebElement SkipRegister = getDriver().findElement(By.id("btn2"));
         elementMethods.ClickElement(SkipRegister);
 
         WebElement SwitchTo = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
+
         
         //Mergem cu mouse-ul pe un anumit element
-        Actions actions = new Actions(getDriver());
-        actions.moveToElement(SwitchTo).perform();
+        //Actions actions = new Actions(getDriver());
+        //actions.moveToElement(SwitchTo).perform();
+        elementMethods.MoveToElement(SwitchTo);
 
         WebElement WindowElement = getDriver().findElement(By.xpath("//a[text()='Windows']"));
         elementMethods.ClickElement(WindowElement);
 
-        getDriver().navigate().to("https://demo.automationtesting.in/Windows.html");
+       // getDriver().navigate().to("https://demo.automationtesting.in/Windows.html");
+        pageMethods.NavigateToPage("https://demo.automationtesting.in/Windows.html");
 
         List<WebElement> WindowOptions = getDriver().findElements(By.cssSelector(".nav-stacked>li>a"));
-        WindowOptions.get(0).click();
+        elementMethods.ClickElement(WindowOptions.get(0));
         WebElement TabButton = getDriver().findElement(By.cssSelector("#Tabbed>a>button"));
         elementMethods.ClickElement(TabButton);
 
@@ -43,35 +48,37 @@ public class WindowTest extends ShareData {
         List<String>Tabs = new ArrayList<>(getDriver().getWindowHandles());
 
         //Ne mutam cu focusul pe un tab specific
+        windowMethods.moveSpecificTab(1);
 
-        getDriver().switchTo().window(Tabs.get(1));
 
         //Inchidem tab-ul curent
-        getDriver().close();
-        getDriver().switchTo().window(Tabs.get(0));
+        windowMethods.closeCurrentTabWindow();
+        windowMethods.moveSpecificTab(0);
 
         WindowOptions.get(1).click();
         WebElement WindowButton = getDriver().findElement(By.cssSelector("#Seperate>button"));
         elementMethods.ClickElement(WindowButton);
 
-        List<String>Windows = new ArrayList<>(getDriver().getWindowHandles());
+
 
         //Ne mutam cu focusul pe un window specific
 
-        getDriver().switchTo().window(Windows.get(1));
+        windowMethods.moveSpecificTab(1);
         getDriver().close();
-        getDriver().switchTo().window(Windows.get(0));
+        windowMethods.moveSpecificTab(0);
         //driv der.close();
 
         WindowOptions.get(2).click();
         WebElement MultipleButton = getDriver().findElement(By.cssSelector("#Multiple>button"));
-        MultipleButton.click();
-        List<String>Multiple = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(Multiple.get(2));
-        getDriver().close();
-        getDriver().switchTo().window(Multiple.get(1));
-        getDriver().close();
-        getDriver().switchTo().window(Multiple.get(0));
+        elementMethods.ClickElement(MultipleButton);
+
+
+
+        windowMethods.moveSpecificTab(2);
+        windowMethods.closeCurrentTabWindow();
+        windowMethods.moveSpecificTab(1);
+        windowMethods.closeCurrentTabWindow();
+        windowMethods.moveSpecificTab(0);
 
 
 

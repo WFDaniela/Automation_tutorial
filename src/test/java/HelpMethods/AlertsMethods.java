@@ -21,14 +21,14 @@ public class AlertsMethods {
     }
     public void DismissAlert(){
         WaitAlert();
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        Alert dismiss = driver.switchTo().alert();
+        dismiss.accept();
     }
-    public void FillAlert(String Value, Boolean MakeDecission){
+    public void FillAlert(String Value, Boolean MakeDecision){
        WaitAlert();
        Alert alert = driver.switchTo().alert();
        alert.sendKeys(Value);
-       if(MakeDecission){
+       if(MakeDecision){
            alert.accept();
        }
        else {
