@@ -1,8 +1,6 @@
 package Pages;
 
-import HelpMethods.AlertsMethods;
-import HelpMethods.ElementMethods;
-import HelpMethods.PageMethods;
+import HelpMethods.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,6 +9,8 @@ public class BasePage {
     public ElementMethods elementMethods;
     public PageMethods pageMethods;
     public AlertsMethods alertsMethods;
+    public FrameMethods frameMethods;
+    public WindowMethods windowMethods;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -18,5 +18,8 @@ public class BasePage {
         elementMethods = new ElementMethods(driver);
         pageMethods = new PageMethods(driver);
         alertsMethods = new AlertsMethods(driver);
+        frameMethods = new FrameMethods(driver);
+        windowMethods = new WindowMethods(driver);
+
     }
 }
