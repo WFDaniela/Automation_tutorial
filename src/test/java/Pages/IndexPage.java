@@ -14,7 +14,7 @@ public class IndexPage extends BasePage{
     private WebElement SignIn;
 
     @FindBy(id = "btn2")
-    private WebElement SkipRegister;
+    private WebElement SkipSignIn;
 
     public IndexPage(WebDriver driver) {
         super(driver);
@@ -27,6 +27,6 @@ public class IndexPage extends BasePage{
     }
 
    public void clickSkipSignIn(){
-       elementMethods.ClickElement(SkipRegister);
+       elementMethods.ClickElement(SkipSignIn);
    }
 }

@@ -1,15 +1,21 @@
 package Tests;
 
+import Objects.AlertObject;
 import Pages.AlertPage;
 import Pages.IndexPage;
 import Pages.RegisterPage;
-import ShareData.ShareData;
+
+import ShareData.Hooks;
 import org.testng.annotations.Test;
 
-public class AlertTest extends ShareData {
+public class AlertTest extends Hooks {
 
     @Test
     public void metodaTest() {
+
+        AlertObject alertObject = new AlertObject(TestData);
+
+
         IndexPage indexPage = new IndexPage(getDriver());
         indexPage.clickSkipSignIn();
 
@@ -19,10 +25,7 @@ public class AlertTest extends ShareData {
         AlertPage alertPage =new AlertPage(getDriver());
         alertPage.interactAlertAccept();
         alertPage.interactAlertDismiss();
-        alertPage.interactAlertValue("test");
-
-
-
+        alertPage.interactAlertValue(alertObject);
 
     }
 }

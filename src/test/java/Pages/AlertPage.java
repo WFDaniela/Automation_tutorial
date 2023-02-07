@@ -1,5 +1,6 @@
 package Pages;
 
+import Objects.AlertObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,10 +38,10 @@ public class AlertPage extends BasePage{
         alertsMethods.DismissAlert();
     }
 
-    public void interactAlertValue(String value){
+    public void interactAlertValue(AlertObject alertObject){
         elementMethods.ClickElement(AlertOptions.get(2));
         elementMethods.ClickElement(AlertText);
-        alertsMethods.FillAlert(value, true);
+        alertsMethods.FillAlert(alertObject.getAlertText(), true);
 
     }
 }
