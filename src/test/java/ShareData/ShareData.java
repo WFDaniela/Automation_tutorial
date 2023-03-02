@@ -1,9 +1,9 @@
 package ShareData;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
@@ -17,9 +17,21 @@ public class ShareData {
     //Folosim adnotarea de @Before din Testng
 
     public void Setup(){
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/Driver/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        String cicd = System.getProperty("ci_cd");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        if (Boolean.parseBoolean(cicd)){
+            chromeOptions.addArguments("--headless");
+
+        }
+         else{
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/Driver/chromedriver.exe");
+        }
+        chromeOptions.addArguments("--window-size=1920,1080");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+        driver = new ChromeDriver(chromeOptions);
+
         driver.get("https://demo.automationtesting.in/Index.html");
 
         //Wait implicit
