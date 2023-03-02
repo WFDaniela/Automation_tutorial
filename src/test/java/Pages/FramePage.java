@@ -26,7 +26,7 @@ public class FramePage extends BasePage {
 
         elementMethods.ClickElement(FrameOptions.get(0));
 
-        frameMethods.SwitchFrame("singleframe");
+        frameMethods.SwitchFrame("SingleFrame");
 
 
         elementMethods.FillElement(FirstFrame, frameObject.getFirstFrame());

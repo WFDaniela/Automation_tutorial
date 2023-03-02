@@ -17,11 +17,13 @@ public class WindowTest extends Hooks {
 
         RegisterPage registerPage = new RegisterPage(getDriver());
         registerPage.goTowindow();
+        testReport.attachReport("pass", "Click on Sign-in button");
 
         WindowPage windowPage = new WindowPage(getDriver());
         windowPage.tabProcess();
         windowPage.windowProcess();
         windowPage.tabsProcess();
+        testReport.attachReport("pass", "Window page");
 
     }
 }
